@@ -1,9 +1,7 @@
 frontend:
 	bash components/frontend.sh
 mongodb:
-	bash components/catalogue.sh
-catalogue:
-	bash components/catalogue.sh
+	bash components/mongodb.sh
 redis:
 	bash components/redis.sh
 user:
@@ -18,6 +16,7 @@ rabbitmq:
 	bash components/rabbimq.sh
 payment:
 	bash components/payment.sh
-
+catalogue:
+	bash components/catalogue.sh
 
 
