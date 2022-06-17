@@ -16,7 +16,7 @@ npm install
 
 
 #    Update `MONGO_DNSNAME` with MongoDB Server IP
-sed -ie 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /etc/systemd/system/catalogue.service
+sed -e 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /etc/systemd/system/catalogue.service
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
 systemctl start catalogue
