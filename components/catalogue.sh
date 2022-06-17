@@ -6,7 +6,7 @@ yum install nodejs -y
 useradd roboshop
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
 cd /home/roboshop
-rm -f catalogue
+rm -rf catalogue
 unzip -o /tmp/catalogue.zip
 # -o added for overwrite existing during re run of code
 mv catalogue-main catalogue
