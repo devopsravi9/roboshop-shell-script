@@ -5,13 +5,9 @@ curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/robos
 yum install -y mongodb-org
 systemctl enable mongod
 systemctl start mongod
-
-
-#1. Update Listen IP address from 127.0.0.1 to 0.0.0.0 in config file
-
-#Config file: `/etc/mongod.conf`
-
 sed -ie  's/127.0.0.1/0.0.0.0./' /etc/mongod.conf
+#sed -i -e  's/127.0.0.1/0.0.0.0./' /etc/mongod.conf
+#if we give -i, -e seprately its not working.
 systemctl restart mongod
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
 cd /tmp
