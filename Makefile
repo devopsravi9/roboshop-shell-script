@@ -1,7 +1,7 @@
 frontend:
 	bash components/frontend.sh
 mongodb:
-	bash components/mongodb.sh
+	bash components/catalogue.sh
 catalogue:
 	bash components/catalogue.sh
 redis:
