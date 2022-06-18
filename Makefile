@@ -13,7 +13,7 @@ mysql:
 shipping:
 	bash components/shipping.sh
 rabbitmq:
-	bash components/rabbimq.sh
+	bash components/rabbitmq.sh
 payment:
 	bash components/payment.sh
 catalogue:
