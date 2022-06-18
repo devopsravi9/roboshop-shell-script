@@ -23,7 +23,7 @@ sed -i -e '/api\/shipping/ s/localhost/shipping.roboshop.internal/' /etc/nginx/d
 sed -i -e '/api\/payment/ s/localhost/payment.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
 
 #systemctl daemon-reload
-systemctl restart nginx
+#systemctl restart nginx
 #    location /api/catalogue/ { proxy_pass http://localhost:8080/; }
 
    # location /api/user/ { proxy_pass http://localhost:8080/; }
