@@ -13,3 +13,17 @@ yum install nginx -y
 rm -rf frontend-main README.md
  mv localhost.conf /etc/nginx/default.d/roboshop.conf
 systemctl restart nginx
+sed -i -e '/api/catalogue/ s/localhost'
+    location /api/catalogue/ { proxy_pass http://localhost:8080/; }
+
+    location /api/user/ { proxy_pass http://localhost:8080/; }
+
+    location /api/cart/ { proxy_pass http://localhost:8080/; }
+
+    location /api/shipping/ { proxy_pass http://localhost:8080/; }
+
+    location /api/payment/ { proxy_pass http://localhost:8080/; }
+
+    location /nginx_status {
+        stub_status on;
+        access_log off;
