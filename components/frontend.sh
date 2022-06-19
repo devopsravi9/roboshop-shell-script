@@ -18,9 +18,9 @@ systemctl restart nginx
 
 sed -i -e '/api\/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/api\/user/ s/localhost/user.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
 #sed -i -e '/api\/user/ s/localhost/user.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
-#sed -i -e '/api\/cart/ s/localhost/cart.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
-#sed -i -e '/api\/shipping/ s/localhost/shipping.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
-#sed -i -e '/api\/payment/ s/localhost/payment.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
+sed -i -e '/api\/cart/ s/localhost/cart.roboshop.internal/' /etc/nginx/default.d/roboshop.conf /etc/nginx/default.d/roboshop.conf
+sed -i -e '/api\/shipping/ s/localhost/shipping.roboshop.internal/' /etc/nginx/default.d/roboshop.conf /etc/nginx/default.d/roboshop.conf
+sed -i -e '/api\/payment/ s/localhost/payment.roboshop.internal/' /etc/nginx/default.d/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 
 systemctl restart nginx
