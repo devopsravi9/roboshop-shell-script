@@ -11,13 +11,14 @@ fi
 CHECK_STAT () {
   if [ $1 -ne 0 ] ; then
       echo -e "\e[31m FAILURE \e[0m"
+      echo -e "\n check log file $LOG for errors \n"
       exit 2
   else
     echo -e "\e[33m SUCCESS \e[0m"
 fi
 }
 
-LOG=/tmp/roboshop
+LOG=/tmp/roboshop.log
 rm -f $LOG
 
 
