@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source CHECK_ROOT
+source components/common.sh
 
 CHECK_ROOT
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
