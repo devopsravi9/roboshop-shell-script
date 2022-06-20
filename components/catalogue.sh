@@ -1,12 +1,15 @@
 #!/usr/bin/bash
 
-USER_ID=$(id -u)
+CHECK_ROOT () {
+  USER_ID=$(id -u)
 if [ $USER_ID -ne 0 ]; then
     echo you are not a root user
     echo you can run the script as root user or use sudo command
     exit 1
 fi
+}
 
+CHECK_ROOT
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 yum install nodejs -y
 useradd roboshop
@@ -29,3 +32,5 @@ systemctl start catalogue
 systemctl enable catalogue
 
 
+
+}
