@@ -33,4 +33,3 @@ systemctl enable catalogue
 
 
 
-}
