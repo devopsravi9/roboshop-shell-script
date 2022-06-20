@@ -9,7 +9,7 @@ fi
 }
 
 CHECK_STAT () {
-  if [$1 -eq 0 ] ; then
+  if [ $1 -eq 0 ] ; then
       echo -e "\e[31m FAILURE \e[0m"
       #exit 2
   else
