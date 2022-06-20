@@ -2,8 +2,8 @@
 
 USER_ID=$(id -u)
 if [ $USER_ID -ne 0 ]; then
-    you are not a root user
-    you can run the script as root user or use sudo command
+    echo you are not a root user
+    echo you can run the script as root user or use sudo command
     exit 1
 fi
 
