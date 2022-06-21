@@ -11,13 +11,18 @@ PRINT "installing nodejs"
 yum install nodejs -y &>> $LOG
 CHECK_STAT $?
 
+
 PRINT "creating roboshop user"
-useradd roboshop &>> $LOG 2> $ERROR
-CHECK_STAT $?
+id roboshop &>> $LOG
+if [ $? -ne 0 ]; then
+    useradd roboshop &>> $LOG 2> $ERROR
+    CHECK_STAT $?
+fi
 
 PRINT "downloading cart content"
 curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>> $LOG
 CHECK_STAT $?
+
 
 cd /home/roboshop
 rm -rf cart
