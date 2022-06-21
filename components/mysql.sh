@@ -9,8 +9,7 @@ curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/robo
 CHECK_STAT $?
 
 PRINT "installing mysql "
-yum install mysql-community-server -y &>>$LOG  && systemctl enable mysqld &>>$LOG &&
- &>>$LOG
+yum install mysql-community-server -y &>>$LOG  && systemctl enable mysqld &>>$LOG && systemctl start mysqld &>>$LOG
 CHECK_STAT $?
 
 MYSQL_DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
