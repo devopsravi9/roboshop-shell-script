@@ -144,20 +144,20 @@ PYTHON () {
 
   PRINT "installing python "
   yum install python36 gcc python3-devel -y &>>$LOG
-  CHECK_ROOT $?
+  CHECK_STAT $?
 
   APP_COMMON_SETUP
 
   PRINT "install ${component} dependencies"
   mv ${component}-main ${component} && cd /home/roboshop/${component} && pip3 install -r requirements.txt &>>$LOG
-  CHECK_ROOT $?
+  CHECK_STAT $?
 
   USER_ID=$(id -u roboshop)
   GROUP_ID=$(id -g roboshop)
 
   PRINT "update ${component}.ini file "
   sed -i -e "/^uid/ c uid = ${USER_ID}" -e "/^gid/ c gid = ${GROUP_ID}" /home/roboshop/payment/payment.ini &>>$LOG
-  CHECK_ROOT $?
+  CHECK_STAT $?
 
   SYSTEMD
 }
