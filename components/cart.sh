@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 component=cart
+source components/common.sh
 NODE_JS
 #source components/common.sh
 #CHECK_ROOT
