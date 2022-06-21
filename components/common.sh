@@ -56,7 +56,7 @@ APP_COMMON_SETUP () {
 
 SYSTEMD () {
     PRINT "updating systemD configuration"
-    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/cart/systemd.service &>> $LOG
+    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/cart/systemd.service &>> $LOG
     CHECK_STAT $?
 
     PRINT "setup systemd configuration"
