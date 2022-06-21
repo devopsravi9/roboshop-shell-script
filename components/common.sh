@@ -48,15 +48,11 @@ APP_COMMON_SETUP () {
     PRINT "unziping ${component} file"
     unzip -o /tmp/${component}.zip &>> $LOG
     CHECK_STAT $?
-
-    PRINT "move & open ${component}"
-    mv ${component}-main ${component} && cd ${component}
-    CHECK_STAT $?
 }
 
 SYSTEMD () {
     PRINT "updating systemD configuration"
-    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/roboshop/${component}/systemd.service &>> $LOG
+    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/'/home/roboshop/${component}/systemd.service &>> $LOG
     CHECK_STAT $?
 
     PRINT "setup systemd configuration"
@@ -81,9 +77,15 @@ NODE_JS () {
 
   APP_COMMON_SETUP
 
+  PRINT "move & open ${component}"
+  mv ${component}-main ${component} && cd ${component}
+  CHECK_STAT $?
+
   PRINT "installing nodejs depedencies for cart component"
   npm install &>> $LOG
   CHECK_STAT $?
+
+
 
   SYSTEMD
 
@@ -117,6 +119,23 @@ NGINX () {
   PRINT "Start Nginx Service"
   systemctl enable nginx &>>${LOG} && systemctl restart nginx &>>${LOG}
   CHECK_STAT $?
+}
+
+MAVEN () {
+  CHECK_ROOT
+
+  PRINT " installing maven"
+  yum install maven -y &>>$LOG
+  CHECK_STAT $?
+
+  APP_COMMON_SETUP
+
+  PRINT "Compile ${COMPONENT} Code"
+  mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+  CHECK_STAT
+
+  SYSTEMD
+
 }
 
 
