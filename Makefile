@@ -9,7 +9,7 @@ user:
 cart:
 	bash components/cart.sh
 mysql:
-	bash components/mysql.sh
+	@bash components/mysql.sh
 shipping:
 	bash components/shipping.sh
 rabbitmq:
