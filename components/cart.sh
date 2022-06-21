@@ -12,13 +12,12 @@ yum install nodejs -y &>> $LOG
 CHECK_STAT $?
 
 
-PRINT "creating roboshop user"
+PRINT "creating appilication user"
 id roboshop &>> $LOG
 if [ $? -ne 0 ]; then
     useradd roboshop &>> $LOG 2> $ERROR
-    CHECK_STAT $?
 fi
-
+CHECK_STAT $?
 PRINT "downloading cart content"
 curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>> $LOG
 CHECK_STAT $?
