@@ -1,15 +1,17 @@
 #!/usr/bin/bash
 
-source components/common.sh
-CHECK_ROOT
+component=cart
+NODE_JS
+#source components/common.sh
+#CHECK_ROOT
 
-PRINT "setting nodejs YUM repo"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOG
-CHECK_STAT $?
+#PRINT "setting nodejs YUM repo"
+#curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOG
+#CHECK_STAT $?
 
-PRINT "installing nodejs"
-yum install nodejs -y &>> $LOG
-CHECK_STAT $?
+#PRINT "installing nodejs"
+#yum install nodejs -y &>> $LOG
+#CHECK_STAT $?
 
 APP_COMMON_SETUP () {
     PRINT "creating appilication user"
@@ -19,20 +21,20 @@ APP_COMMON_SETUP () {
     fi
     CHECK_STAT $?
 
-    PRINT "downloading cart content"
-    curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>> $LOG
+    PRINT "downloading ${component} content"
+    curl -s -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/${component}/archive/main.zip" &>> $LOG
     CHECK_STAT $?
 
 
     cd /home/roboshop
-    rm -rf cart
+    rm -rf ${component}
 
-    PRINT "unziping cart file"
-    unzip -o /tmp/cart.zip &>> $LOG
+    PRINT "unziping ${component} file"
+    unzip -o /tmp/${component}.zip &>> $LOG
     CHECK_STAT $?
 
-    mv cart-main cart
-    cd cart
+    mv ${component}-main ${component}
+    cd ${component}
 }
 APP_COMMON_SETUP
 
