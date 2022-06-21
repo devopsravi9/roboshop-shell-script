@@ -29,6 +29,19 @@ rm -f $LOG
 ERROR=/tmp/error.log
 rm -f $ERROR
 
+NODE_JS () {
+  CHECK_ROOT
+
+  PRINT "setting nodejs YUM repo"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOG
+  CHECK_STAT $?
+
+  PRINT "installing nodejs"
+  yum install nodejs -y &>> $LOG
+  CHECK_STAT $?
+
+
+}
 
 
 

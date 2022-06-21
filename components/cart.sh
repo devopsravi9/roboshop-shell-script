@@ -11,27 +11,30 @@ PRINT "installing nodejs"
 yum install nodejs -y &>> $LOG
 CHECK_STAT $?
 
+APP_COMMON_SETUP () {
+    PRINT "creating appilication user"
+    id roboshop &>> $LOG
+    if [ $? -ne 0 ]; then
+        useradd roboshop &>> $LOG 2> $ERROR
+    fi
+    CHECK_STAT $?
 
-PRINT "creating appilication user"
-id roboshop &>> $LOG
-if [ $? -ne 0 ]; then
-    useradd roboshop &>> $LOG 2> $ERROR
-fi
-CHECK_STAT $?
-PRINT "downloading cart content"
-curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>> $LOG
-CHECK_STAT $?
+    PRINT "downloading cart content"
+    curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>> $LOG
+    CHECK_STAT $?
 
 
-cd /home/roboshop
-rm -rf cart
+    cd /home/roboshop
+    rm -rf cart
 
-PRINT "unziping cart file"
-unzip -o /tmp/cart.zip &>> $LOG
-CHECK_STAT $?
+    PRINT "unziping cart file"
+    unzip -o /tmp/cart.zip &>> $LOG
+    CHECK_STAT $?
 
-mv cart-main cart
-cd cart
+    mv cart-main cart
+    cd cart
+}
+APP_COMMON_SETUP
 
 PRINT "installing nodejs depedencies for cart component"
 npm install &>> $LOG
