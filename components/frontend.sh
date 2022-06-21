@@ -1,28 +1,37 @@
 #!/usr/bin/bash
 
 source components/common.sh
+component=frontend
 CHECK_ROOT
 
-yum install nginx -y
-systemctl enable nginx
-systemctl start nginx
+NGINX () {
+  PRINT "installing nginx"
+  yum install nginx -y &>>$LOG
+  CHECK_STAT $?
 
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
-cd /usr/share/nginx/html
-rm -rf *
-unzip -o /tmp/frontend.zip
-mv frontend-main/* .
-mv static/* .
-rm -rf frontend-main README.md
+  PRINT "downloading ${component} content"
+  curl -s -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/${component}/archive/main.zip" &>>$LOG
+  CHECK_STAT $?
 
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
-systemctl restart nginx
+  PRINT "clean old content"
+  cd /usr/share/nginx/html && rm -rf * &>>$LOG
+  CHECK_STAT $?
 
-sed -i -e '/api\/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/api\/user/ s/localhost/user.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
-#sed -i -e '/api\/user/ s/localhost/user.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
-sed -i -e '/api\/cart/ s/localhost/cart.roboshop.internal/' /etc/nginx/default.d/roboshop.conf /etc/nginx/default.d/roboshop.conf
-sed -i -e '/api\/shipping/ s/localhost/shipping.roboshop.internal/' /etc/nginx/default.d/roboshop.conf /etc/nginx/default.d/roboshop.conf
-sed -i -e '/api\/payment/ s/localhost/payment.roboshop.internal/' /etc/nginx/default.d/roboshop.conf /etc/nginx/default.d/roboshop.conf
+  PRINT "extract the ${component} content "
+  unzip -o /tmp/${component}.zip &>>$LOG
+  CHECK_STAT $?
 
+  PRINT " organising ${component} content"
+  mv ${component}-main/* .  && mv static/* . && rm -rf ${component}-main README.md && mv localhost.conf /etc/nginx/default.d/roboshop.conf
+  CHECK_STAT $?
 
-systemctl restart nginx
+  PRINT "Update ${COMPONENT} Configuration"
+  sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/user/ s/localhost/user.roboshop.internal/' -e '/cart/ s/localhost/cart.roboshop.internal/' -e '/payment/ s/localhost/payment.roboshop.internal/' -e '/shipping/ s/localhost/shipping.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
+  CHECK_STAT $?
+
+  PRINT "Start Nginx Service"
+  systemctl enable nginx &>>${LOG} && systemctl restart nginx &>>${LOG}
+  CHECK_STAT $?
+}
+
+NGINX
