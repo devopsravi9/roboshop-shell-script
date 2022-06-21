@@ -2,7 +2,7 @@
 
 ##### Change these values ###
 ZONE_ID="Z04748881QTGM14CJWM7A"
-SG_NAME="allow- all-to-public"
+SG_NAME="allow-all-to-public"
 #############################
 
 
