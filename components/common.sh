@@ -132,11 +132,12 @@ MAVEN () {
 
   PRINT "moving file"
   mv ${COMPONENT}-main ${COMPONENT}
-  CHECK_STAT
+  CHECK_STAT $?
 
-  PRINT "Compile ${COMPONENT} Code"
-  cd ${COMPONENT} && mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-  CHECK_STAT
+   PRINT "Compile ${COMPONENT} Code"
+   mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+   CHECK_STAT $?
+
 
   SYSTEMD
 
