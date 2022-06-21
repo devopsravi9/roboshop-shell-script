@@ -131,7 +131,7 @@ MAVEN () {
   APP_COMMON_SETUP
 
    PRINT "Compile ${component} Code"
-    mv ${component}-main ${COMPONENT} && cd ${component} && mvn clean package &>>${LOG} && mv target/${component}-1.0.jar ${component}.jar
+    mv ${component}-main ${component} && cd ${component} && mvn clean package &>>${LOG} && mv target/${component}-1.0.jar ${component}.jar
     CHECK_STAT $?
 
 
