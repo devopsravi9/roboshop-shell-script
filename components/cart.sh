@@ -12,7 +12,7 @@ yum install nodejs -y &>> $LOG
 CHECK_STAT $?
 
 PRINT "creating roboshop user"
-useradd roboshop &>> $LOG
+useradd roboshop &>> $LOG 2> $ERROR
 CHECK_STAT $?
 
 PRINT "downloading cart content"
