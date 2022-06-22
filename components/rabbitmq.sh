@@ -8,9 +8,10 @@ if [ -z "${MYSQL_USER_PASSWORD}" ]; then
   exit 1
 fi
 
-PRINT " installing erlang"
-yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>>$LOG
+PRINT "Setup Yum Repos"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG}
 CHECK_STAT $?
+
 
 PRINT " settingup rabbitmq repo file"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>$LOG
