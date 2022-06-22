@@ -1,10 +1,11 @@
 #!/usr/bin/bash
+# we have to provide password roboshop123 for RABBITMQ_USER_PASSWORD in shell
 
 source components/common.sh
 CHECK_ROOT
 
-if [ -z "${MYSQL_USER_PASSWORD}" ]; then
-  echo "need MYSQL_USER_PASSWORD env variable."
+if [ -z "${RABBITMQ_USER_PASSWORD}" ]; then
+  echo "need RABBITMQ_USER_PASSWORD env variable."
   exit 1
 fi
 
@@ -28,7 +29,7 @@ CHECK_STAT $?
 rabbitmqctl list_users | grep roboshop &>>LOG
 if [ $? -ne 0 ]; then
   PRINT "adding roboshop user"
-  rabbitmqctl add_user roboshop ${MYSQL_USER_PASSWORD} &>>$LOG
+  rabbitmqctl add_user roboshop ${RABBITMQ_USER_PASSWORD} &>>$LOG
   CHECK_STAT $?
 fi
 

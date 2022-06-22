@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 
 CHECK_ROOT () {
 USER_ID=$(id -u)

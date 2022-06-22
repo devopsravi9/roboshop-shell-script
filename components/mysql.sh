@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+# we have to provide password RoboShop@1 for MYSQL_PASSWORD in shell
 
 source components/common.sh
 
