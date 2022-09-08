@@ -14,8 +14,12 @@ PRINT "clearing old content"
 cd /usr/share/nginx/html && rm -rf *
 CHECKSTAT $?
 
+PRINT "extracting the content"
+unzip /tmp/frontend.zip  &>> $LOG
+CHECKSTAT $?
+
 PRINT "organizing the content"
-unzip /tmp/frontend.zip && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOG
+mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOG
 CHECKSTAT $?
 
 PRINT "enable & start service"
