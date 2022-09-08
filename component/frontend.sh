@@ -1,6 +1,7 @@
 
 source component/common.sh
 
+FILE
 
 PRINT "installing nginx"
 yum install nginx -y &>> $LOG
