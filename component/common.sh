@@ -13,5 +13,8 @@ PRINT () {
   echo $1
 }
 
-touch /tmp/robo.log
+cat /tmp/robo.log &> /dev/null
+if [ $? -ne 0 ]; then
+  touch /tmp/robo.log
+fi
 LOG=/tmp/robo.log
