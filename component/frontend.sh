@@ -42,8 +42,10 @@ mv frontend-main/static/* .
 x=$?
 CHECKSTAT $x
 
+pwd
+ls
 echo move conf file ----------------------------
-mv frontend-main/localhost.conf /etc/nginx/system.d/roboshop.conf
+mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
 x=$?
 CHECKSTAT $x
 
