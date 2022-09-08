@@ -13,12 +13,5 @@ PRINT () {
   echo $1
 }
 
-FILE () {
-  cat /tmp/robo.log &> /dev/null
-  if [ $? -ne 0 ]; then
-    touch /tmp/robo.log
-  else
-    rm -rf /tmp/robo.log/*
-  fi
-}
 LOG=/tmp/robo.log
+rm -rf $LOG

@@ -28,6 +28,7 @@ LOG=/tmp/roboshop.log
 rm -f $LOG
 ERROR=/tmp/error.log
 rm -f $ERROR
+# &>> this will automatcally creates file
 
 APP_COMMON_SETUP () {
     PRINT "creating appilication user"
