@@ -1,22 +1,24 @@
 frontend:
-	bash components/frontend.sh
+	bash component/frontend.sh
 mongodb:
-	bash components/mongodb.sh
+	bash component/mongodb.sh
 redis:
-	bash components/redis.sh
+	bash component/redis.sh
 user:
-	bash components/user.sh
+	bash component/user.sh
 cart:
-	bash components/cart.sh
+	bash component/cart.sh
 mysql:
-	@bash components/mysql.sh
+	@bash component/mysql.sh
 shipping:
-	bash components/shipping.sh
+	bash component/shipping.sh
 rabbitmq:
-	bash components/rabbitmq.sh
+	bash component/rabbitmq.sh
 payment:
-	bash components/payment.sh
+	bash component/payment.sh
 catalogue:
-	bash components/catalogue.sh
+	bash component/catalogue.sh
+
+
 
 
