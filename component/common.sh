@@ -13,11 +13,12 @@ PRINT () {
   echo $1
 }
 
-
-cat /tmp/robo.log &> /dev/null
-if [ $? -ne 0 ]; then
-  touch /tmp/robo.log
-else [ $? -eq 0 ]; then
- rm -rf /tmp/robo.log/*
-fi
+FILE () {
+  cat /tmp/robo.log &> /dev/null
+  if [ $? -ne 0 ]; then
+    touch /tmp/robo.log
+  else
+    rm -rf /tmp/robo.log/*
+  fi
+}
 LOG=/tmp/robo.log
