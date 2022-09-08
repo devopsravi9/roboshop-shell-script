@@ -2,42 +2,42 @@
 source component/common.sh
 
 touch /tmp/out
-yum install nginx -y &>> /tmp/out
+yum install nginx -y
 x=$?
 CHECKSTAT $x
 
-systemctl enable nginx &>> /tmp/out
+systemctl enable nginx
 x=$?
 CHECKSTAT $x
 
-systemctl start nginx &>> /tmp/out
+systemctl start nginx
 x=$?
 CHECKSTAT $x
 
-curl -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>> /tmp/out
+curl -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 x=$?
 CHECKSTAT $x
 
-cd /usr/share/nginx/html &>> /tmp/out
+cd /usr/share/nginx/html
 x=$?
 CHECKSTAT $x
 
-rm -rf * &>> /tmp/out
+rm -rf *
 x=$?
 CHECKSTAT $x
 
-unzip /tmp/frontend.zip &>> /tmp/out
+unzip /tmp/frontend.zip
 x=$?
 CHECKSTAT $x
 
-mv frontend-main/static/* . &>> /tmp/out
+mv frontend-main/static/* .
 x=$?
 CHECKSTAT $x
 
-mv frontend-main/localhost.conf /etc/nginx/system.d/roboshop.conf &>> /tmp/out
+mv frontend-main/localhost.conf /etc/nginx/system.d/roboshop.conf
 x=$?
 CHECKSTAT $x
 
-systemctl restart nginx &>> /tmp/out
+systemctl restart nginx
 x=$?
 CHECKSTAT $x
