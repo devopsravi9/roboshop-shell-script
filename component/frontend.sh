@@ -1,55 +1,23 @@
 
 source component/common.sh
 
-touch /tmp/out
-echo installing nginx ------------
+
+PRINT "installing nginx"
 yum install nginx -y
-x=$?
-CHECKSTAT $x
+CHECKSTAT $?
 
-echo enable nginx --------------------
-systemctl enable nginx
-x=$?
-CHECKSTAT $x
-
-echo start nginx ---------------------
-systemctl start nginx
-x=$?
-CHECKSTAT $x
-
-echo download frontend zip file -----------------
+PRINT "downloading frontend component"
 curl -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
-x=$?
-CHECKSTAT $x
+CHECKSTAT $?
 
-echo cd to html ----------------------
-cd /usr/share/nginx/html
-x=$?
-CHECKSTAT $x
+PRINT "clearing old content"
+cd /usr/share/nginx/html && rm -rf *
+CHECKSTAT $?
 
-echo remove old content ----------------------
-rm -rf *
-x=$?
-CHECKSTAT $x
+PRINT "organizing the content"
+unzip /tmp/frontend.zip && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+CHECKSTAT $?
 
-echo unzip frontend ------------------------------
-unzip /tmp/frontend.zip
-x=$?
-CHECKSTAT $x
-
-echo move frontend-----------------
-mv frontend-main/static/* .
-x=$?
-CHECKSTAT $x
-
-pwd
-ls
-echo move conf file ----------------------------
-mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
-x=$?
-CHECKSTAT $x
-
-echo restart nginx ----------------------------
-systemctl restart nginx
-x=$?
-CHECKSTAT $x
+PRINT "enable & start service"
+systemctl enable nginx && systemctl start nginx
+CHECKSTAT $?

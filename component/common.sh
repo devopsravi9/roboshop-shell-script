@@ -6,3 +6,8 @@ CHECKSTAT () {
     echo sucess
   fi
 }
+
+PRINT () {
+  echo $1
+}
+
