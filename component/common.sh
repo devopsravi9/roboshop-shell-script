@@ -3,11 +3,15 @@ CHECKSTAT () {
     echo -e "\e[31m failure \e[0m"
     exit 1
   else
-    echo sucess
+    echo  -e "\e[32m SUCESS \e[0m"
+    echo "-------------------------------------------------------------- \n" &>> $LOG
   fi
 }
 
 PRINT () {
+  echo "--------------------------$1---------------------------------" &>> $LOG
   echo $1
 }
 
+touch /tmp/robo.log
+LOG=/tmp/robo.log
