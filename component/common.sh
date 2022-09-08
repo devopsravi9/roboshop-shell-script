@@ -16,6 +16,8 @@ PRINT () {
 cat /tmp/robo.log &> /dev/null
 if [ $? -ne 0 ]; then
   touch /tmp/robo.log
+else
+ rm -rf /tmp/robo.log/*
 fi
-rm -rf /tmp/robo.log/*
+
 LOG=/tmp/robo.log
