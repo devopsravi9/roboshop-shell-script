@@ -31,7 +31,7 @@ npm install &>> $LOG
 CHECKSTAT $?
 
 PRINT "update catalogue systemd URLs"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal' /home/roboshop/catalogue/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
 CHECKSTAT $?
 
 
