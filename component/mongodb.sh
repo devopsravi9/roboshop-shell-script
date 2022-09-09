@@ -1,3 +1,6 @@
+source component/common.sh
+
+
 CHECKROOT
 LOG
 
