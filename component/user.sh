@@ -2,6 +2,6 @@ source component/common.sh
 CHECKROOT
 LOG
 
-COMPONENT=catalogue
+COMPONENT=user
 
 NODEJS

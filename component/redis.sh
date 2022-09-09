@@ -15,6 +15,6 @@ sed -i -e '/^bind/s/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf && sed -i -e '/^bi
 CHECKSTAT $?
 
 PRINT " enable, start redis"
-systemctl enable redis && systemctl start redis &>> $LOG
+systemctl enable redis &>> $LOG && systemctl start redis &>> $LOG
 CHECKSTAT $?
 
