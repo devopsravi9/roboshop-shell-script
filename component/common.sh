@@ -60,7 +60,7 @@ mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.
 CHECKSTAT $?
 
 PRINT "update ${COMPONENT} systemd URLs"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -i 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -i 's/MONGO_ENDPOINT /mongodb.roboshop.internal/' /etc/systemd/system/${COMPONENT}.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT /mongodb.roboshop.internal/' /etc/systemd/system/${COMPONENT}.service
 CHECKSTAT $?
 
 PRINT "daemon-reload, enable, start ${COMPONENT}"
