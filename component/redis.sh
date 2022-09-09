@@ -2,9 +2,10 @@ source component/common.sh
 CHECKROOT
 LOG
 
+PRINT "downloading redis repo file"
 curl -L -o /etc/yum.repos.d/redis.repo https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo
-yum install redis-6.2.7 -y
+CHECKSTAT $?
 
-sed -i -e ''
-systemctl enable redis
-systemctl start redis
+PRINT "installing redis "
+yum install redis-6.2.7 -y
+CHECKSTAT $?
