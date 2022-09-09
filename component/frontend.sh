@@ -1,6 +1,7 @@
 
 source component/common.sh
 
+CHECKSTAT
 
 PRINT "installing nginx"
 yum install nginx -y &>> $LOG
@@ -23,5 +24,5 @@ mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/defaul
 CHECKSTAT $?
 
 PRINT "enable & start service"
-systemctl enable nginx && systemctl start nginx
+systemctl enable nginx && systemctl start nginx &>> $LOG
 CHECKSTAT $?

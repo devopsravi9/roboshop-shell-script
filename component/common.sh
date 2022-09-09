@@ -1,4 +1,12 @@
 CHECKSTAT () {
+if [ $(id -u) -ne 0 ]; then
+  echo -e "\e[31m run as ROOT user or use SUDO command \e[0m"
+  exit 2
+fi
+}
+
+
+CHECKSTAT () {
   if [ $1 -ne 0 ]; then
     echo -e "\e[31m failure \e[0m"
     exit 1
