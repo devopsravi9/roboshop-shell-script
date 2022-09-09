@@ -1,4 +1,4 @@
-CHECKSTAT () {
+CHECKROOT () {
 if [ $(id -u) -ne 0 ]; then
   echo -e "\e[31m run as ROOT user or use SUDO command \e[0m"
   exit 2
