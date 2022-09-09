@@ -29,3 +29,6 @@ CHECK_STAT $?
 PRINT "Load Schema"
 cd /tmp && unzip -o mongodb.zip &>>${LOG}  && cd mongodb-main && mongo < catalogue.js &>>${LOG}  && mongo < users.js &>>${LOG}
 CHECK_STAT $?
+
+
+# unzip -o ; override files without prompt

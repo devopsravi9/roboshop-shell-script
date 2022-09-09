@@ -28,8 +28,8 @@ PRINT "organizing mongod schema files"
 cd /tmp && unzip -o mongodb.zip  &>> $LOG && cd mongodb-main
 CHECKSTAT $?
 
-PRINT "load catlogue & users schema file to mongod" &>> $LOG
-mongo < catalogue.js &>> $LOG &&  mongo < users.js
+PRINT "load catlogue & users schema file to mongod"
+mongo < catalogue.js &>> $LOG &&  mongo < users.js &>> $LOG
 CHECKSTAT $?
 
 
