@@ -10,7 +10,7 @@ curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/robos
 CHECK_STAT $?
 
 PRINT "Install MongoDB"
-yum install -y mongodb-org &>>${LOG}
+yum install -y mongodb-org &>> ${LOG}
 CHECK_STAT $?
 
 PRINT "Configure MongoDB Service"
