@@ -2,6 +2,7 @@
 source component/common.sh
 
 CHECKROOT
+LOG
 
 PRINT "installing nginx"
 yum install nginx -y &>> $LOG

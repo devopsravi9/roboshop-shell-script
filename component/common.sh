@@ -21,5 +21,7 @@ PRINT () {
   echo $1
 }
 
+LOG () {
 LOG=/tmp/robo.log
 rm -rf $LOG
+}
