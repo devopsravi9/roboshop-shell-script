@@ -10,8 +10,12 @@ PRINT "installing nodejs "
 yum install nodejs -y &>> $LOG
 CHECKSTAT $?
 
+ID=$(id -u roboshop)
+
 PRINT "add roboshop user"
-useradd roboshop &>> $LOG
+if [ -z "$ID" ]; then
+  useradd roboshop &>> $LOG
+fi
 CHECKSTAT $?
 
 PRINT "download catalogue schema files"
