@@ -19,7 +19,7 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/cat
 CHECKSTAT $?
 
 PRINT "organizing catalogue schema files"
-cd /home/roboshop && unzip /tmp/catalogue.zip &>> $LOG && mv catalogue-main catalogue && cd /home/roboshop/catalogue
+cd /home/roboshop && unzip -o /tmp/catalogue.zip &>> $LOG && mv catalogue-main catalogue && cd /home/roboshop/catalogue
 CHECKSTAT $?
 
 PRINT "install nodejs dependencies"

@@ -25,7 +25,7 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 CHECKSTAT $?
 
 PRINT "organizing mongod schema files"
-cd /tmp && unzip mongodb.zip  &>> $LOG && cd mongodb-main
+cd /tmp && unzip -o mongodb.zip  &>> $LOG && cd mongodb-main
 CHECKSTAT $?
 
 PRINT "load catlogue & users schema file to mongod" &>> $LOG

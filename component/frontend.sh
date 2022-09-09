@@ -17,7 +17,7 @@ cd /usr/share/nginx/html && rm -rf *
 CHECKSTAT $?
 
 PRINT "extracting the content"
-unzip /tmp/frontend.zip  &>> $LOG
+unzip -o /tmp/frontend.zip  &>> $LOG
 CHECKSTAT $?
 
 PRINT "organizing the content"
