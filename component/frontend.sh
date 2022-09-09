@@ -27,3 +27,5 @@ CHECKSTAT $?
 PRINT "enable & start service"
 systemctl enable nginx && systemctl start nginx &>> $LOG
 CHECKSTAT $?
+
+
