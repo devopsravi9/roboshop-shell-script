@@ -17,3 +17,4 @@ systemctl enable mongod && systemctl start mongod &>> $LOG
 CHECKSTAT $?
 
 
+
