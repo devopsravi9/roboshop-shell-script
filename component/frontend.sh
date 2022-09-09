@@ -25,7 +25,7 @@ mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/defaul
 CHECKSTAT $?
 
 PRINT "enable & start service"
-systemctl enable nginx && systemctl start nginx &>> $LOG
+systemctl enable nginx  &>> $LOG && systemctl start nginx &>> $LOG
 CHECKSTAT $?
 
 

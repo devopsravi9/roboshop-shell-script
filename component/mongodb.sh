@@ -17,7 +17,7 @@ sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>> $LOG
 CHECKSTAT $?
 
 PRINT "enable & start mongod"
-systemctl enable mongod && systemctl start mongod &>> $LOG
+systemctl enable mongod &>> $LOG && systemctl start mongod &>> $LOG
 CHECKSTAT $?
 
 PRINT "download mongod schema files"
@@ -25,11 +25,11 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 CHECKSTAT $?
 
 PRINT "organizing mongod schema files"
-cd /tmp && unzip mongodb.zip && cd mongodb-main &>> $LOG
+cd /tmp && unzip mongodb.zip  &>> $LOG && cd mongodb-main
 CHECKSTAT $?
 
 PRINT "load catlogue & users schema file to mongod" &>> $LOG
-mongo < catalogue.js &&  mongo < users.js
+mongo < catalogue.js &>> $LOG &&  mongo < users.js
 CHECKSTAT $?
 
 
