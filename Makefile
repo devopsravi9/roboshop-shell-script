@@ -18,6 +18,8 @@ payment:
 	bash component/payment.sh
 catalogue:
 	bash component/catalogue.sh
+dispatch:
+	bash component/dispatch.sh
 
 
 
