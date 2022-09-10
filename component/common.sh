@@ -60,17 +60,7 @@ PRINT "install nodejs dependencies"
 npm install &>> $LOG
 CHECKSTAT $?
 
-PRINT "managing systemd files"
-mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
-CHECKSTAT $?
-
-PRINT "update ${COMPONENT} systemd URLs"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT /mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT /catalogue.roboshop.internal/'  /etc/systemd/system/${COMPONENT}.service
-CHECKSTAT $?
-
-PRINT "daemon-reload, enable, start ${COMPONENT}"
-systemctl daemon-reload &>> $LOG && systemctl start ${COMPONENT} && systemctl enable ${COMPONENT} &>> $LOG
-CHECKSTAT $?
+SYSTEMD
 
 }
 
