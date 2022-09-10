@@ -27,7 +27,7 @@ MYSQL_DEFAULT_PASSWORD=$(grep temp /var/log/mysqld.log | head -1 | awk -F " " '{
 CHECKSTAT $?
 
 PRINT "check and update password"
-echo show databases | mysql -uroot -p${MYSQL_PASSWORD}
+echo show databases | mysql -uroot -p${MYSQL_PASSWORD} &>> $LOG
 if [ $? -ne 0 ]; then
   echo "updating mysql password"
   echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql -uroot -p${MYSQL_DEFAULT_PASSWORD}
@@ -50,5 +50,5 @@ cd /tmp && unzip -o /tmp/${COMPONENT}.zip &>> $LOG && rm -rf ${COMPONENT} && mv 
 CHECKSTAT $?
 
 PRINT "load schema into DB"
-mysql -u root -p${MYSQL_PASSWORD} <shipping.sql
+mysql -u root -p${MYSQL_PASSWORD} <shipping.sql &>> $LOG
 CHECKSTAT $?
