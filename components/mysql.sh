@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 # we have to provide password RoboShop@1 for MYSQL_PASSWORD in shell
+#sudo make mysql this command cant acess env variables wright command is sudo -E make mysql
+#check in this way 1. env | mysql_pass   2. sudo env | mysql_pass  3. sudo -E env | mysql_pass
 
 source components/common.sh
 
