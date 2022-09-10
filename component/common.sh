@@ -25,16 +25,7 @@ LOG=/tmp/robo.log
 rm -rf $LOG
 }
 
-NODEJS () {
-
-PRINT "downloading nodejs repo file"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOG
-CHECKSTAT $?
-
-PRINT "installing nodejs "
-yum install nodejs -y &>> $LOG
-CHECKSTAT $?
-
+APP_COMMON_SETUP () {
 ID=$(id -u roboshop)
 
 PRINT "add roboshop user"
@@ -50,6 +41,20 @@ CHECKSTAT $?
 PRINT "organizing ${COMPONENT} schema files"
 cd /home/roboshop && unzip -o /tmp/${COMPONENT}.zip &>> $LOG && rm -rf ${COMPONENT} && mv ${COMPONENT}-main ${COMPONENT} && cd /home/roboshop/${COMPONENT}
 CHECKSTAT $?
+
+}
+
+NODEJS () {
+
+PRINT "downloading nodejs repo file"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOG
+CHECKSTAT $?
+
+PRINT "installing nodejs "
+yum install nodejs -y &>> $LOG
+CHECKSTAT $?
+
+APP_COMMON_SETUP
 
 PRINT "install nodejs dependencies"
 npm install &>> $LOG
@@ -67,4 +72,47 @@ PRINT "daemon-reload, enable, start ${COMPONENT}"
 systemctl daemon-reload &>> $LOG && systemctl start ${COMPONENT} && systemctl enable ${COMPONENT} &>> $LOG
 CHECKSTAT $?
 
+}
+
+NGINX () {
+PRINT "installing nginx"
+yum install nginx -y &>> $LOG
+CHECKSTAT $?
+
+PRINT "downloading ${component} component"
+curl -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/${component}/archive/main.zip" &>> $LOG
+CHECKSTAT $?
+
+PRINT "clearing old content"
+cd /usr/share/nginx/html && rm -rf *
+CHECKSTAT $?
+
+PRINT "extracting the content"
+unzip -o /tmp/${component}.zip  &>> $LOG
+CHECKSTAT $?
+
+PRINT "organizing the content"
+mv ${component}-main/static/* . && mv ${component}-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOG
+CHECKSTAT $?
+
+PRINT "enable & start service"
+systemctl enable nginx  &>> $LOG && systemctl start nginx &>> $LOG
+CHECKSTAT $?
+
+}
+
+SYSTEMD () {
+PRINT "managing systemd files"
+mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
+CHECKSTAT $?
+
+PRINT "update ${COMPONENT} systemd URLs"
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/docdb.roboshop.internal/' -e 's/CARTHOST/cart.roboshop.internal/' -e 's/USERHOST/user.roboshop.internal/' -e 's/AMQPHOST/rabbitmq.roboshop.internal/' /etc/systemd/system/${COMPONENT}.service
+CHECKSTAT $?
+
+PRINT "daemon-reload, enable, start ${COMPONENT}"
+systemctl daemon-reload &>> $LOG && systemctl start ${COMPONENT} && systemctl enable ${COMPONENT} &>> $LOG
+CHECKSTAT $?
+
+systemctl status ${COMPONENT}
 }
