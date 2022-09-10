@@ -39,7 +39,7 @@ curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/
 CHECKSTAT $?
 
 PRINT "organizing ${COMPONENT} schema files"
-cd /home/roboshop && unzip -o /tmp/${COMPONENT}.zip &>> $LOG && rm -rf ${COMPONENT} && mv ${COMPONENT}-main ${COMPONENT} && cd /home/roboshop/${COMPONENT}
+cd /home/roboshop && rm -rf ${COMPONENT} && unzip -o /tmp/${COMPONENT}.zip &>> $LOG && mv ${COMPONENT}-main ${COMPONENT} && cd /home/roboshop/${COMPONENT}
 CHECKSTAT $?
 
 }
