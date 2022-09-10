@@ -13,8 +13,9 @@ PRINT "installing python dependencies"
 pip3 install -r requirements.txt
 CHECKSTAT $?
 
-#sed -i -e "/uid/ c /${USER}" -e "/gid/ c /${GROUP}" /${COMPONENT}/payment.ini
+USER=$(id -u roboshop)
+GROUP=$(id -g roboshop)
 
-# Update the roboshop user and group id in payment.ini file.
+sed -i -e "/uid/ s/1/${USER}/" -e "/gid/ c gid = ${GROUP}" /${COMPONENT}/payment.ini
 
-#SYSTEMD
+SYSTEMD
