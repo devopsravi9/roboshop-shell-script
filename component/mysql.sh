@@ -2,6 +2,7 @@ source component/common.sh
 CHECKROOT
 LOG
 
+echo "${MYSQL_PASSWORD}"
 if [ -z "${MYSQL_PASSWORD}" ]; then
   echo "need MYSQL_PASSWORD env variable"
   exit 1
