@@ -28,11 +28,11 @@ rm -rf $LOG
 APP_COMMON_SETUP () {
 ID=$(id -u roboshop)
 
-PRINT "add roboshop user"
 if [ -z "$ID" ]; then
+  PRINT "add roboshop user"
   useradd roboshop &>> $LOG
+  CHECKSTAT $?
 fi
-CHECKSTAT $?
 
 PRINT "download ${COMPONENT} schema files"
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>> $LOG
