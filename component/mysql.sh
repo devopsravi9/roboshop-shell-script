@@ -1,7 +1,7 @@
 source component/common.sh
 CHECKROOT
 LOG
-
+COMPONENT=mysql
 echo "${MYSQL_PASSWORD}"
 
 if [ -z "${MYSQL_PASSWORD}" ]; then
