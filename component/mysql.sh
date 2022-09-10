@@ -3,6 +3,7 @@ CHECKROOT
 LOG
 COMPONENT=mysql
 echo "${MYSQL_PASSWORD}"
+MYSQL_PASSWORD=RoboShop@1
 
 if [ -z "${MYSQL_PASSWORD}" ]; then
   echo "need MYSQL_PASSWORD env variable"
