@@ -2,12 +2,12 @@ source component/common.sh
 CHECKROOT
 LOG
 
-PRINT "downloding erlang depenencies"
-yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>> ${LOG}
-CHECKSTAT $?
-
 PRINT "setup rabbitmq repo file"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>> ${LOG}
+CHECKSTAT $?
+
+PRINT "downloding erlang depenencies"
+yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>> ${LOG}
 CHECKSTAT $?
 
 PRINT "installing rabbitmq"
