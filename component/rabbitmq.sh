@@ -1,6 +1,11 @@
 source component/common.sh
 CHECKROOT
 LOG
+RABBITMQ_PASSWORD=roboshop123
+
+if [ -z ${RABBITMQ_PASSWORD} ]; then
+  echo "need a RABBITMQ_PASSWORD env variable"
+fi
 
 PRINT "setup rabbitmq repo file"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>> ${LOG}
@@ -18,7 +23,13 @@ PRINT "enable & start rabbitmq"
 systemctl enable rabbitmq-server  &>> ${LOG} && systemctl start rabbitmq-server
 CHECKSTAT $?
 
-rabbitmqctl add_user roboshop roboshop123
+sudo rabbitmqctl list_users | grep roboshop
+if [ $? -ne 0 ]; then
+  PRINT "adding roboshop user"
+  rabbitmqctl add_user roboshop "${RABBITMQ_PASSWORD}"
+  CHECKSTAT $?
+fi
+
 rabbitmqctl set_user_tags roboshop administrator
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 
