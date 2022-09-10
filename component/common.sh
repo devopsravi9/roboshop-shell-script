@@ -26,9 +26,10 @@ rm -rf $LOG
 }
 
 APP_COMMON_SETUP () {
-ID=$(id -u roboshop)
 
-if [ -z "$ID" ]; then
+id -u roboshop &>> $LOG
+
+if [ $? -ne 0 ]; then
   PRINT "add roboshop user"
   useradd roboshop &>> $LOG
   CHECKSTAT $?
