@@ -2,3 +2,5 @@ git clone https://github.com/devopsravi9/roboshop-shell-script.git
 
 
 alias gp='git pull' && alias cd='cd ~/roboshop-shell-script' && alias m='sudo make'
+
+root@localhost: iZrk:glEj4eg
