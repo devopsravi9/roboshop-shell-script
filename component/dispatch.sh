@@ -12,3 +12,5 @@ APP_COMMON_SETUP
 go mod init dispatch
 go get
 go build
+
+SYSTEMD

@@ -95,6 +95,8 @@ PRINT "organizing the content"
 mv ${component}-main/static/* . && mv ${component}-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOG
 CHECKSTAT $?
 
+sed -i
+
 PRINT "enable & start service"
 systemctl enable nginx  &>> $LOG && systemctl start nginx &>> $LOG
 CHECKSTAT $?
