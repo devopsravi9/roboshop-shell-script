@@ -3,14 +3,14 @@ CHECKROOT
 LOG
 COMPONENT=dispatch
 
-PRINT "installing go land"
+PRINT "installing go lang"
 yum install golang -y &>> $LOG
 CHECKSTAT $?
 
 APP_COMMON_SETUP
 
-go mod init dispatch
-go get
-go build
+go mod init dispatch &>> $LOG
+go get &>> $LOG
+go build &>> $LOG
 
 SYSTEMD
