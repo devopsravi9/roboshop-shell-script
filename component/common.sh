@@ -79,8 +79,8 @@ PRINT "installing nginx"
 yum install nginx -y &>> $LOG
 CHECKSTAT $?
 
-PRINT "downloading ${component} component"
-curl -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/${component}/archive/main.zip" &>> $LOG
+PRINT "downloading ${COMPONENT} component"
+curl -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>> $LOG
 CHECKSTAT $?
 
 PRINT "clearing old content"
@@ -88,11 +88,11 @@ cd /usr/share/nginx/html && rm -rf *
 CHECKSTAT $?
 
 PRINT "extracting the content"
-unzip -o /tmp/${component}.zip  &>> $LOG
+unzip -o /tmp/${COMPONENT}.zip  &>> $LOG
 CHECKSTAT $?
 
 PRINT "organizing the content"
-mv ${component}-main/static/* . && mv ${component}-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOG
+mv ${COMPONENT}-main/static/* . && mv ${COMPONENT}-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOG
 CHECKSTAT $?
 
 PRINT "updating ip adresses"
