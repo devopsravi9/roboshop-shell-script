@@ -37,7 +37,7 @@ CHECKSTAT $?
 PRINT "check and uninstall password valid plugins"
 echo "show plugins" | mysql -uroot -p${MYSQL_PASSWORD} | grep validate_password
 if [ $? -eq 0 ]; then
-  echo uninstall plugin validate_password; | mysql -uroot -p${MYSQL_PASSWORD}
+  echo "uninstall plugin validate_password"; | mysql -uroot -p${MYSQL_PASSWORD}
 fi
 CHECKSTAT $?
 
