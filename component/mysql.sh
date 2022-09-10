@@ -26,16 +26,20 @@ PRINT "getting temporary password"
 MYSQL_DEFAULT_PASSWORD=$(grep temp /var/log/mysqld.log | head -1 | awk -F " " '{print$NF}')
 CHECKSTAT $?
 
+PRINT "check and update password"
 echo show databases | mysql -uroot -p${MYSQL_PASSWORD}
 if [ $? -ne 0 ]; then
   echo "updating mysql password"
   echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql -uroot -p${MYSQL_DEFAULT_PASSWORD}
 fi
+CHECKSTAT $?
 
-echo show plugins | mysql -uroot -p${MYSQL_PASSWORD} | grep validate_password
+PRINT "check and uninstall password valid plugins"
+echo "show plugins" | mysql -uroot -p${MYSQL_PASSWORD} | grep validate_password
 if [ $? -eq 0 ]; then
   echo uninstall plugin validate_password; | mysql -uroot -p${MYSQL_PASSWORD}
 fi
+CHECKSTAT $?
 
 PRINT "download ${COMPONENT} schema files"
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>> $LOG
