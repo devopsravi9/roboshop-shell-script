@@ -30,7 +30,7 @@ MYSQL_DEFAULT_PASSWORD=$(grep temp /var/log/mysqld.log | head -1 | awk -F " " '{
 echo show databases | mysql -uroot -p${MYSQL_PASSWORD} &>> $LOG
 if [ $? -ne 0 ]; then
   PRINT "updating mysql password"
-  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql -uroot -p${MYSQL_DEFAULT_PASSWORD}
+  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql  --connect-expired-password -uroot -p${MYSQL_DEFAULT_PASSWORD}
   CHECKSTAT $?
 fi
 
