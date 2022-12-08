@@ -28,7 +28,11 @@
   - name: start service
     become: yes
     systemd: 
-      name: 
-      - zookeeper
-      - kafka
+      name: zookeeper
       state: started
+      
+  - name: start service
+    become: yes
+    systemd: 
+      name: kafka
+      state: started    
