@@ -1,6 +1,6 @@
 - hosts: localhost
   become: yes
-       
+  tasks:     
   - name: unarchive tar file
     unarchive:
       src: /backup/kafka/kafka_2.13-3.3.1.tgz
