@@ -1,0 +1,34 @@
+- hosts: localhost
+  become: yes
+       
+  - name: unarchive tar file
+    unarchive:
+      src: /backup/kafka/kafka_2.13-3.3.1.tgz
+      dest: /tmp/kafka
+      
+  - name: move the file
+    shell:
+      cmd: mv /tmp/kafka/kafka_2.13-3.3.1 /usr/bin/kafka
+      
+  - name: copy kafka service
+    copy: 
+      src: /backup/kafka/zookeeper.service
+      dest: /etc/systemd/system/zookeeper.service
+      
+  - name: copy kafka service
+    copy: 
+      src: /backup/kafka/kafka.service
+      dest: /etc/systemd/system/kafka.service    
+      
+  - name: systemctl reload
+    become: yes
+    systemd:
+      daemon_reload: yes
+    
+  - name: start service
+    become: yes
+    systemd: 
+      name: 
+      - zookeeper
+      - kafka
+      state: started
